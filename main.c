@@ -15,12 +15,12 @@
 
 int main(int argc, char *argv[]) 
 {
-  
+
   int total_length = 0;
 
   volatile shared_memory_t shared_memory; // Simulating shared memory
-  
-  
+
+
   //********** remember this is only simulaton *************
   // Simulating memory mapping for CPU1 and CPU2,
   //volatile shared_memory_t* shared_mem_cpu1 = &shared_memory;
@@ -28,24 +28,28 @@ int main(int argc, char *argv[])
 
   for (int i = 1; i < argc; i++) 
   {
-        total_length += strlen(argv[i]);
+    total_length += strlen(argv[i]);
   }
+  total_length += (argc - 2); // Adding spaces between each argument
+
   // Allocate memory for the concatenated string, plus one for the null terminator
   char *concatenated_string = malloc(total_length + 1); 
   if (concatenated_string == NULL) 
   {
-        fprintf(stderr, "Memory allocation failed\n");
-        return 1;
+    fprintf(stderr, "Memory allocation failed\n");
+    return 1;
   }
-    // Concatenate the strings into the allocated memory
+
+  // Concatenate the strings into the allocated memory
   concatenated_string[0] = '\0'; // Initialize the concatenated string
   for (int i = 1; i < argc; i++) 
   {
-        strcat(concatenated_string, argv[i]);
-        strcat(concatenated_string, " ");
+    strcat(concatenated_string, argv[i]);
+    if (i < argc - 1) 
+    {
+      strcat(concatenated_string, " "); // Add space between arguments
+    }
   }
-  //printf("concated string is %s",concatenated_string);
-
   // Initialize the shared memory flags to make sure CPU1 to get ready
   shared_memory.status_ready = 0;
   shared_memory.status_ack = 1;
@@ -72,6 +76,7 @@ int main(int argc, char *argv[])
   // Wait for threads to finish
   thrd_join(thread1, NULL);
   thrd_join(thread2, NULL);
+  free(concatenated_string);
   return 0;
 }
 

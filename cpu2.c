@@ -25,7 +25,7 @@ void cpu2_read_data(volatile shared_memory_t *shared_memory, volatile uint16_t *
 
   //check if data is available
   //if this is invalid and zero is return, keep waiting!!!
-  while(read_shared_mem_cpu2(STATUS_READY_OFFSET,shared_mem_cpu2) != 1) printf("CPU 2 waiting \n");
+  while(read_shared_mem_cpu2(STATUS_READY_OFFSET,shared_mem_cpu2) != 1);//printf("CPU 2 waiting \n");
 
   // Read data from shared memory
   for (size_t i = 0; i < (BUFFER_SIZE - 1) / 2; ++i)
@@ -35,9 +35,13 @@ void cpu2_read_data(volatile shared_memory_t *shared_memory, volatile uint16_t *
     buffer[received_data_size++] = word & 0xFF;
     buffer[received_data_size++] = (word >> 8) & 0xFF;
     // Clear status flag to indicate data has been processed
-    shared_memory->status_ready = 0;
-    shared_memory->status_ack = 1;
+   // shared_memory->status_ready = 0;
+   // shared_memory->status_ack = 1;
   }
+  printf("CPU2: Received message: %s\n", buffer);
+  printf("CPU2: Received message of %d bytes\n", strlen(buffer));
+  shared_memory->status_ready = 0;
+  shared_memory->status_ack = 1;
 }
 
 /* CPU2 Thread */
@@ -60,8 +64,8 @@ int CPU2_thread(void* arg)
   #endif
 
   cpu2_read_data(shared_memory,shared_mem_cpu2,received_message);
-  printf("CPU2: Received message: %s\n", received_message);
-  printf("CPU2: Received message of %d bytes\n", strlen(received_message));
+  //printf("CPU2: Received message: %s\n", received_message);
+  //printf("CPU2: Received message of %d bytes\n", strlen(received_message));
   return 0;
 }
 

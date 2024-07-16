@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 **This code by default runs in x86, If you want to port this code on other platform  with shared mem address, then please disable FOR_X86 to 0 in headers.h** <br />
@@ -52,3 +53,9 @@ CPU 2 waiting         <br />
 ./main 11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111   <br />
 CPU1: Sent 90 bytes   <br />
 Buffer Overflow detected  <br />
+=======
+for compiing the code 
+make
+./main <message>
+
+>>>>>>> new-branch-name
