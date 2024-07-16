@@ -61,7 +61,7 @@ int CPU1_thread(void* arg)
   #if FOR_X86 == 1
     volatile shared_memory_t* shared_mem_cpu1 = params->shared_mem;
   #else // port to the embedded board with dedicated address.
-    volatile shared_memory_t* shared_mem_cpu1 = (volatile shared_memory_t*)SHARED_MEMORY_START_CPU1
+    volatile shared_memory_t* shared_mem_cpu1 = (volatile shared_memory_t*)SHARED_MEMORY_START_CPU1;
   #endif
   const char* data = params->data;
   size_t n = 0;
