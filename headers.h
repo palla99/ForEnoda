@@ -9,7 +9,7 @@
 #define SHARED_MEMORY_START_CPU2 ((volatile uint16_t*) 0x80010)  // 0x80010-0x80030  -> 16 bits addressable 
 
 #ifndef FOR_X86
-  #define FOR_X86                                             1  // Make it enable -> 1 if you want to test in X86
+  #define FOR_X86                                           1  // Make it enable -> 1 if you want to test in X86
 #endif
 
 
