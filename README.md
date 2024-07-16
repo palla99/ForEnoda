@@ -1,3 +1,13 @@
+
+
+This code by default runs in x86, If you want to port this code on other platform  with shared mem address, then please disable FOR_X86 to 0 in headers.h <br />
+#ifndef FOR_X86  <br />
+  #define FOR_X86                                           1  // Make it enable -> 1 if you want to test in X86   <br />
+#endif   <br />
+
+
+
+
 for compiing the code <br />
 make <br /> 
 ./main message <br /> 
