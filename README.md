@@ -1,6 +1,6 @@
-for compiing the code < br / > 
-make < br / > 
-./main <message> < br / > 
+for compiing the code <br />
+make < br /> 
+./main <message> < br /> 
 
 
 Test 1
