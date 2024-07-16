@@ -30,7 +30,7 @@ void cpu1_write_data(volatile shared_memory_t* shared_mem_cpu1,const char* data,
     if (data_len - bytes_sent > (BUFFER_SIZE - 2)) // 30 
     {
       chunk_size = BUFFER_SIZE - 2;
-      printf(" Buffer Overflow detected \n");
+      printf("Buffer Overflow detected \n");
       exit(EXIT_FAILURE);
     }
     else
@@ -52,7 +52,7 @@ void cpu1_write_data(volatile shared_memory_t* shared_mem_cpu1,const char* data,
   }
   while (shared_mem_cpu1->status_ready != 0 || shared_mem_cpu1->status_ack == 0); //printf("CPU 1 waiting \n");
   
-  printf("CPU1 : Ack received from CPU2 \n");// this message wakes up after ack signal from cpu2
+  printf("CPU1: Ack received from CPU2 \n");// this message wakes up after ack signal from cpu2
 }
 /* CPU1 Thread */
 int CPU1_thread(void* arg)
@@ -66,7 +66,7 @@ int CPU1_thread(void* arg)
   const char* data = params->data;
   size_t n = 0;
   n = strlen(data);
-  printf(" CPU1: Sent %d bytes\n", n);
+  printf("CPU1: Sent %d bytes\n", n);
   cpu1_write_data(shared_mem_cpu1,data,n);
   return 0;
 }

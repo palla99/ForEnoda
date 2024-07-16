@@ -1,2 +1,4 @@
-# Simple Test
-Test
+for compiing the code 
+make
+./main <message>
+
